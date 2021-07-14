@@ -1,10 +1,6 @@
 library(tidyverse)
 library(readxl)
 
-pcoa <- read_tsv(file='raw_data/baxter.braycurtis.pcoa.axes', 
-                 col_types = cols(group = col_character()))
-                 
-
 metadata <- read_excel(path='raw_data/baxter.metadata.xlsx',
                        col_types = c(sample ='text', fit_result = 'numeric',
                                      site = 'text', Dx_bin = 'text', dx ='text',
@@ -24,10 +20,4 @@ metadata <- read_excel(path='raw_data/baxter.metadata.xlsx',
          family_history_of_crc=hx_fam_crc, diagnosis_bin=dx_bin,
          diagnosis=dx, sex=gender, height_cm=height, weight_kg=weight)
 
-
-metadata_pcoa <- inner_join(metadata, pcoa, by=c('sample'='group'))
-
 #write_tsv(metadata, path = 'processed_data/baxter.metadata_clean.tsv')
-#write_tsv(pcoa, path = 'processed_data/baxter.braycurtis.pcoa_clean.axes')
-#write_tsv(metadata_pcoa, path = 'processed_data/metadata_pcoa_clean.tsv')
-
